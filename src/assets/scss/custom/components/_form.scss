@@ -1,0 +1,31 @@
+.form-control {
+    margin-bottom: 1rem;
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-label-wrap {
+        margin-bottom: 2px;
+        &.required {
+           
+            .form-label::after{
+                content: "*";
+                display: inline-block;
+                margin-left: 2px;
+                color: $danger;
+            }
+        }
+    }
+    &.row{
+        display: flex;
+        .form-label-wrap{
+            flex: 0 0  40%;
+            max-width: 40%;
+            padding-right: 10px;
+        }
+        .input-containter{
+            flex-grow: 1;
+        }
+    }
+}

@@ -1,0 +1,97 @@
+@import '@/assets/scss/config/variable.scss';
+
+/* 
+
+ Position of container
+    position: absolute;
+    bottom: 5%;
+    justify-self: center; - centers horizontally
+    align-self: center;   - Centers itself vertically
+    
+Size of container
+    width: 200px;
+    height: 150px;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    background-color: white;
+    
+Layout within the container
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+*/
+
+.mainLayout {
+  width: 100%;
+  max-width: 100%;
+  background-color: #f9fafb;
+
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.mainBodyContainer {
+    flex: 1;
+
+    &.collapsedSidebar {
+        margin-left: 90px;
+    }
+}
+
+.sidebarContainer {
+  width: $sidebarWidth;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease;
+  z-index: 99;
+  background: $primaryDark;
+  height: 100vh;
+  &.sidebarContainerCollapse {
+    width: 90px;
+  }
+}
+
+.mainBodyContainer {
+  flex-grow: 1;
+  padding: 1rem;
+  margin-left: $sidebarWidth;
+  transition: all 0.3s ease;
+  position: relative;
+  &.collapsedSidebar {
+    margin-left: 90px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .mainLayout {
+    padding-top: 52px;
+    display: flex;
+  }
+
+  .mainBody {
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+}
+
+.publicHeader {
+  padding: 1rem 0;
+}
+.publicFooter {
+  padding: 1rem 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

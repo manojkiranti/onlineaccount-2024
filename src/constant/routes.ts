@@ -1,0 +1,26 @@
+export const routes = [
+    { label: "New Debit Card", value: "/card/new-debit-card" },
+    { label: "New Credit Card", value: "/card/new-credit-card" },
+    { label: "Re-Pin Debit Card", value: "/card/repin-request" },
+    { label: "Debit Card Block", value: "/card/debit-card-block" },
+    // Add more routes as needed
+    { label: "Debit Card Unblock", value: "/card/debit-card-unblock" },
+    { label: "New Mobile Banking Registration", value: "/mobank/new-registration" },
+    { label: "Mobile Banking PIN Reset", value: "/mobank/reset-pin" },
+    { label: "Mobile Banking Deactivate", value: "mobank/deactivate" },
+    { label: "Mobile Banking Activate", value: "/mobank/activate" },
+    { label: "Open Fixed Deposit", value: "/customer-service/fixed-deposit" },
+    { label: "Dispute Claim", value: "/customer-service/dispute-claim" },
+    { label: "Block Account(Hack/Scam)", value: "/customer-service/account-freeze" },
+    { label: "Cheque Request", value: "/customer-service/cheque-request" },
+    { label: "Cheque Stop", value: "/customer-service/cheque-stop" },
+    { label: "Balance Certificate", value: "/customer-service/balance-certificate-request" },
+    { label: "Locker Request", value: "/customer-service/locker-request" },
+    { label: "Cash Deposit", value: "/teller-service/cash-deposit" },
+    { label: "Cheque Deposit", value: "/teller-service/cheque-deposit" },
+    { label: "Bank Gurantee Verification", value: "/document-verification/bank-guarantee" },
+    { label: "Home Loan", value: "/loan/home-loan" },
+    { label: "Gold Loan", value: "/loan/gold-loan" },
+    { label: "Loan Against Share", value: "/loan/loan-against-share" },
+    { label: "Credit Card Loan", value: "/loan/credit-card" }
+  ];

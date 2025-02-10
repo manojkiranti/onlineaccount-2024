@@ -1,0 +1,119 @@
+@import '@/assets/scss/app.scss';
+
+/* 
+
+//  Position of container
+    position: absolute;
+    bottom: 5%;
+    justify-self: center; //centers horizontally
+    align-self: center;   //Centers itself vertically
+    
+// Size of container
+    width: 200px;
+    height: 150px;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    background-color: white;
+    
+// Layout within the container
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+*/
+
+.headerContainer {
+  width: calc(100vw - $sidebarWidth);
+  border-bottom: 1px solid $borderColor; // Added bottom border
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 0px 32px 0px 32px;
+  position: fixed;
+  width: calc(100% - $sidebarWidth);
+  left: $sidebarWidth;
+  z-index: 9;
+  background-color: $white;
+}
+
+.headerMenuItem {
+  height: 55px;
+  align-items: center;
+  display: flex;
+}
+
+.rightNavigation {
+  //  Position of container
+  // position: absolute;
+  // right: 1%;
+  // justify-self: flex-end; //centers horizontally
+  align-self: center; //Centers itself vertically
+
+  // Layout within the container
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  // padding: 20px;
+  // justify-content: flex-end;
+}
+
+.headerMenu {
+  height: 55px;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-inline-start: 0;
+
+  li {
+    margin-right: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.88);
+      transition: color 0.3s ease;
+      padding: 0 10px;
+      font-size: 20px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      position: relative; // Allows underline positioning within <a>
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        bottom: -2px; // Align underline to bottom of <a>
+        background-color: #f5bf36;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        left: 0;
+      }
+
+      // &:hover {
+      //     color: #bb5757;
+      // }
+
+      &.active {
+        // color: #bb5757; // Optional: change color for active link
+
+        &::after {
+          transform: scaleX(1); // Expand underline on active state
+        }
+      }
+    }
+  }
+
+  li:last-child {
+    margin-right: 0;
+  }
+}

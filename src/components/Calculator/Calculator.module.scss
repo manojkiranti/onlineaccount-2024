@@ -1,0 +1,28 @@
+.calculatorListContainer {
+  background-color: #fff;
+  margin-top: 1.5rem;
+}
+
+.calculatorContainer {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.linkContainer:hover {
+  text-decoration: underline;
+}
+
+.link {
+  font-size: 1rem;
+}

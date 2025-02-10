@@ -1,0 +1,21 @@
+.featureContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.checkWrapper {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.textContainer {
+  font-size: 0.9rem;
+  color: #1e293b;
+
+  .title {
+    font-weight: 500;
+  }
+}

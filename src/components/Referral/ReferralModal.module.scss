@@ -1,0 +1,48 @@
+@import '@/assets/scss/app.scss';
+
+.shareButtons {
+    margin-top: 10px;
+}
+
+.button {
+    width: 110px;
+}
+
+.referButton {
+    @extend .primaryButton;   
+}
+
+.modal {
+    min-width: 600px;
+    max-width: 600px;
+}
+
+.tabs {
+    width: 100%;
+}
+
+.tabBar {
+    width: 100%;
+}
+
+.tabLabel {
+    width: 50%;
+    text-align: center;
+}
+
+.codeContainer {
+    text-align: center;
+}
+
+.referralCode {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.messageContainer {
+    background-color: #f0f0f0;
+    padding: 10px;
+    color: #888;
+    user-select: none;
+}
+

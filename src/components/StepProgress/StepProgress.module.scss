@@ -1,0 +1,52 @@
+.stepProgress {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.step-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: #d0d9e4;
+
+    &__text {
+        margin-top: 6px;
+        font-size: 12px;
+    }
+
+    &-active {
+        color: #64748b;
+        color: #f5bf36;
+    }
+
+    &::before {
+        content: "";
+        display: block;
+        height: 6px;
+        width: 100%;
+        background-color: #e2e8f0;
+        border-radius: 4px;
+    }
+
+    &-active::before {
+        content: "";
+        display: block;
+        height: 6px;
+        width: 100%;
+        // background-color: #e2e8f0;
+        background-color: #f5bf36;
+        border-radius: 4px;
+    }
+
+    &-completed::before {
+        background-color: #f0dc99;
+    }
+    &-completed {
+        color: #f5bf36;
+    }
+}

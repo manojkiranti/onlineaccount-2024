@@ -1,0 +1,75 @@
+@import '@/assets/scss/app.scss';
+
+/* 
+
+ Position of container
+    position: absolute;
+    bottom: 5%;
+    justify-self: center; - centers horizontally
+    align-self: center;   - Centers itself vertically
+    
+Size of container
+    width: 200px;
+    height: 150px;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    background-color: white;
+    
+Layout within the container
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+*/
+
+.mainLayout {
+  width: 100%;
+  max-width: 100%;
+
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+// .mainBodyContainer {
+//     flex: 1;
+
+//     &.collapsedSidebar {
+//         margin-left: 90px;
+//     }
+// }
+
+.sidebarContainer {
+  height: 100vh;
+  width: $sidebarWidth;
+  transition: all 0.3s ease;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: 1px solid $borderColor; // Added bottom border
+  &.sidebarContainerCollapse {
+    width: 90px;
+  }
+}
+
+.mainBody {
+  // border: 1px solid red; // Added border
+  width: calc(100vw - $sidebarWidth); // Fill entire width
+  padding: 10px 50px 10px 50px;
+  min-height: calc(100vh - 55px); // Ensure it fills the entire viewport height
+  display: flex; // Ensure content fills the space
+  flex-direction: column; // Stack children vertically
+  box-sizing: border-box; // Include border in the element's total size
+  position: fixed;
+  top: 55px;
+  left: $sidebarWidth;
+  background-color: white;
+}

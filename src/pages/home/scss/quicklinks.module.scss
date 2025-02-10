@@ -1,0 +1,56 @@
+
+  @import "../../../assets/scss/config/_variable.scss";
+
+  .aside-menu {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  
+    ul {
+      list-style-type: none;
+  
+      li {
+        background-color: $primary;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        width: 80px;
+        height: 80px;
+        color: white;
+        justify-content: center;
+        text-align: center;
+        padding: 8px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+        &:first-child {
+          border-top-left-radius: 10px;
+        }
+  
+        &:last-child {
+          border-bottom-left-radius: 10px;
+          border-bottom: none;
+        }
+      }
+  
+      .aside-title {
+        color: white;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 13px;
+      }
+  
+      .aside-icon {
+        display: inline-block;
+        font-size: 20px;
+        line-height: 20px;
+        color: white;
+        margin-bottom: 8px;
+      }
+    }
+  }
+  
+ 
+  

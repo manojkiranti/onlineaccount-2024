@@ -1,0 +1,28 @@
+.tipsContainer {
+  height: 100%;
+}
+
+.tipsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.tipsTitle {
+  display: flex;
+  align-items: center;
+  color: #003862;
+  gap: 1.2rem;
+}
+
+.tipsNumber {
+  background-color: #f3f4f6;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+}

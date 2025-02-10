@@ -1,0 +1,46 @@
+.smallCalculatorCard {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #f1f5f9;
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.smallCalculatorCard:hover {
+  cursor: pointer;
+  background-color: #f1f5f9;
+}
+
+.iconContainer {
+  background-color: #fefaf0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.icon {
+  height: 28px;
+  width: 28px;
+}
+.smallCalculatorCardContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.title {
+  margin: 1rem 0 0 0;
+  font-size: 0.9rem;
+  color: '#1E293B';
+  font-weight: 500 !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .title {
+    font-size: 0.8rem;
+  }
+}

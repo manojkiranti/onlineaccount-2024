@@ -1,0 +1,17 @@
+.number-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: list-counter;
+    > li{
+        margin-bottom: 1rem;
+        counter-increment: list-counter;
+        position: relative;
+        padding-left: 1.5rem;
+        &::before{
+            content: counter(list-counter) ".";
+            position: absolute;
+            left: 0;
+        }
+    }
+}

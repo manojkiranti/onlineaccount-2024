@@ -1,0 +1,26 @@
+
+
+.primaryButton {
+    background-color: $yellow;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+.bankify-bot{
+    background: $primary;
+    color: $white;
+    display: inline-flex;
+    padding: 9px 22px;
+    border-radius: 5px;
+    align-items: center;
+    gap: 10px;
+    font-size: 21px;
+    cursor: pointer;
+}

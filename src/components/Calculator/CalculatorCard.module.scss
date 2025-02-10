@@ -1,0 +1,41 @@
+.calculatorCard {
+  background-color: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 8px;
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.calculatorCard:hover {
+  cursor: pointer;
+  background-color: #f1f5f9;
+}
+
+.icon {
+  height: 36px;
+  width: 36px;
+}
+
+.iconContainer {
+  background-color: #fefaf0;
+  width: fit-content;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.linkContainer:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,42 @@
+.menu {
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.menu .ant-dropdown-menu-item {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.menu .ant-dropdown-menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.menu .ant-dropdown-menu-item-icon {
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.details {
+  padding: 15px 0px;
+  width: 140px;
+}
+
+.name {
+  font-size: 14px;
+  color: white !important;
+}
+
+.email {
+  font-size: 14px;
+  max-width: 200px;
+  color: white !important;
+}

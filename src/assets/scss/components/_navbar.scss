@@ -1,0 +1,41 @@
+.navbar-wrapper{
+    background: white;
+    margin-top: -80px;
+    position: relative;
+    z-index: 3;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    padding: 1.5rem;
+    
+}
+.navbar-item{
+    background: #F4F4F4;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    max-width: 100%;
+    width: 140px;
+    height: 115px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    .navbar-icon{
+        color: $primary;
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    &:hover{
+        background-color: #ebe7e7;
+    }
+    &.active{
+        background-color: $primary;
+        .navbar-icon{
+            color: $white;
+        }
+        .ant-typography{
+            color: $white!important;
+        }
+    }
+}
