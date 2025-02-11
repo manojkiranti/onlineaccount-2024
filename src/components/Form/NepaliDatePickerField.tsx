@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller, Control } from "react-hook-form";
-import Calendar from '@sbmdkl/nepali-datepicker-reactjs';
+import Calendar, { onChangeValue } from '@sbmdkl/nepali-datepicker-reactjs';
 
 import { ErrorText } from "../Elements";
 import FormLabel from "./FormLabel";
@@ -43,10 +43,10 @@ const NepaliDatePickerField: React.FC<NepaliDatePickerFieldProps> = ({
           render={({ field }) => (
             <Calendar
               // Add error styling if necessary
-              inputClassName={`form-control ${error ? "error" : ""}`}
+            
               // Use field.value or default to an empty string
-              value={field.value || ""}
-              onChange={(value: string) => {
+           
+              onChange={(value: onChangeValue) => {
                 // When the date changes, update the form field value
                 field.onChange(value);
               }}
@@ -54,7 +54,7 @@ const NepaliDatePickerField: React.FC<NepaliDatePickerFieldProps> = ({
               hideDefaultValue={true}
               placeholder={placeholder}
               
-              language="en"
+              language="EN"
             />
           )}
         />
