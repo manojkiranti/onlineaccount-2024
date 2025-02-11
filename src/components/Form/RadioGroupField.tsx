@@ -2,6 +2,7 @@ import React from 'react';
 import { Controller, Control } from 'react-hook-form';
 import { Radio, theme } from 'antd';
 import { ErrorText } from '../Elements';
+import FormLabel from './FormLabel';
 
 const { useToken } = theme;
 
@@ -12,35 +13,30 @@ interface RadioGroupFieldProps {
   options: Array<{ label: string; value: any }>;
   error?: string;
   formDirection?: 'row' | 'column';
+  required?: boolean;
+  size?: 'large' | 'middle' | 'small';
 }
 
 const RadioGroupField: React.FC<RadioGroupFieldProps> = ({
-  label,
+  label='',
   control,
   name,
   options,
   error,
   formDirection = 'column',
+  size='large',
+  required=false
 }) => {
   const { token } = useToken();
   return (
     <div className={`form-control ${formDirection}`}>
-      <div className="form-label-wrap">
-        {label && (
-          <label
-            className="form-label"
-            style={{ color: token.colorTextSecondary }}
-          >
-            {label}
-          </label>
-        )}
-      </div>
+      <FormLabel required={required} label={label} />
       <div className="input-containter">
         <Controller
           name={name}
           control={control}
           render={({ field }) => (
-            <Radio.Group {...field}>
+            <Radio.Group size={size} {...field}>
               {options.map((option) => (
                 <Radio key={option.value} value={option.value}>
                   {option.label}

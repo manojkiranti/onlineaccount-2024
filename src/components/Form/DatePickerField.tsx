@@ -28,7 +28,7 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
   error,
   formDirection = 'column',
   required = false,
-  size = 'middle',
+  size = 'large',
   placeholder = 'Select Date',
   maxDate,
   minDate,

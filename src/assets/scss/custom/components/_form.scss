@@ -3,6 +3,7 @@
 
     .form-label {
         font-size: 14px;
+        font-weight: 500;
     }
 
     .form-label-wrap {
@@ -27,5 +28,20 @@
         .input-containter{
             flex-grow: 1;
         }
+    }
+}
+
+.bs-datepicker-input-containter{
+    input{
+        width: 100%;
+        height: 38px;
+        padding: 7px 11px;
+        font-size: 16px;
+        line-height: 1.5;
+        border-radius: 8px;
+        background: #ffffff;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #d9d9d9;
     }
 }
