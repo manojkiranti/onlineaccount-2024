@@ -15,6 +15,8 @@ import { profileAPI } from '@/pages/profile/api/profileAPI';
 import { dashboardAPI } from './apis/dashboardApi';
 import { dealAPI } from '@/pages/mortgage/apis/dealAPI';
 import { ragAPI } from './apis/ragAPI';
+import { productAPI } from '@/pages/home/api/productAPI';
+import { stepAPI } from '@/pages/accountForm/api/stepAPI';
 
 export const store = configureStore({
   reducer: {
@@ -29,6 +31,8 @@ export const store = configureStore({
     [dashboardAPI.reducerPath]: dashboardAPI.reducer,
     [dealAPI.reducerPath]: dealAPI.reducer,
     [ragAPI.reducerPath]:ragAPI.reducer,
+    [productAPI.reducerPath]: productAPI.reducer,
+    [stepAPI.reducerPath]: stepAPI.reducer,
     auth: auth,
     common: common,
   },
@@ -44,7 +48,9 @@ export const store = configureStore({
       profileAPI.middleware,
       dashboardAPI.middleware,
       dealAPI.middleware,
-      ragAPI.middleware
+      ragAPI.middleware,
+      productAPI.middleware,
+      stepAPI.middleware
     ),
 });
 

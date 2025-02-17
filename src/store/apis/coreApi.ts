@@ -48,6 +48,19 @@ export const coreAPI = createApi({
         }
       },
     }),
+    getPrerequisit: builder.query<ApiResponse<any>, void>({
+      query: () => 'api/online/all-prerequisite',
+      
+    }),
+    getBranchList: builder.query<ApiResponse<any>, void>({
+      query: () => 'api/online/branch',
+    }),
+    getDistrictByProvince: builder.query<ApiResponse<any>, string | undefined>({
+      query: (id) => `api/online/district/${id}`,
+    }),
+    getLocalGovernmentByDistrict: builder.query<ApiResponse<any>, string | undefined>({
+      query: (id) => `api/online/local-government/${id}`,
+    })
   }),
 });
 
@@ -56,5 +69,9 @@ export const {
   useFetchLendersQuery,
   useFetchImageURLQuery,
   useCustomerServiceRequestMutation,
-  useServiceOtpVerifyMutation
+  useServiceOtpVerifyMutation,
+  useGetPrerequisitQuery,
+  useGetBranchListQuery,
+  useGetDistrictByProvinceQuery,
+  useGetLocalGovernmentByDistrictQuery
 } = coreAPI;

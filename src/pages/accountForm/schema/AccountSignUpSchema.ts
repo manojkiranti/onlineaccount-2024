@@ -1,17 +1,18 @@
 import * as yup from "yup";
 
 const accountSignUpSchema = yup.object({
-    existingAccount: yup.boolean().required(),
-    fullName: yup.string().required("Name is required"),
-    email: yup.string().email().required("Email is required"),
+    isExistingCustomer: yup.string().required(),
+    accountName: yup.string().required("Name is required"),
+    emailAddress: yup.string().email().required("Email is required"),
+    branch: yup.string().required("Branch is required"),
     mobileNumber: yup.string().required("Mobile number is required"),
 
-    saluation: yup.string().required("Salutation is required"),
+    salutation: yup.number().required("Salutation is required"),
     gender: yup.string().required("Gender is required"),
-    nationality: yup.string().required("Nationality is required"),
-    currency: yup.string().required("Currency is required"),
-    dateOfBirthAD: yup.string().required("Date of birth (AD) is required"),
-    dateOfBirthBS: yup
+    nationality: yup.number().required("Nationality is required"),
+    currencyId: yup.number().required("Currency is required"),
+    dateOfBirth: yup.string().required("Date of birth (AD) is required"),
+    dateOfBirthBs: yup
     .object({
       bsDate: yup.string().required("Date of birth (BS) is required"),
       adDate: yup.string().required("Date of birth (AD) is required"),

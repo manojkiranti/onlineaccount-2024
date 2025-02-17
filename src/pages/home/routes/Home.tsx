@@ -3,7 +3,9 @@ import QuickLinks from "../components/QuickLinks";
 import Banner from "../components/Banner";
 import ProductsList from "../components/ProductsList";
 
+
 const Home = () => {
+
   return (
     <>
       <div>

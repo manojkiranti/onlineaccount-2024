@@ -9,5 +9,6 @@ export { default as ListOptionsField } from './ListOptionsField';
 export { default as FormLabel } from './FormLabel';
 export { default as FormTitleLabel } from './FormTitleLabel';
 export { default as CheckBoxField } from './CheckBoxField';
+export { default as CheckBoxGroupField } from './CheckBoxGroupField';
 export { default as MultiCheckboxField } from './MultiCheckboxField';
 export { default as NepaliDatePickerField } from './NepaliDatePickerField';

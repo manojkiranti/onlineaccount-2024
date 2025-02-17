@@ -48,3 +48,8 @@ export const displayWarning = (warningMsg: any = 'Warning'): void => {
 export const displayInfo = (infoMsg: any = 'Info'): void => {
   message.info(infoMsg);
 };
+
+
+export const displayErrorMsg = (errMsg: any = 'Error'): void => {
+  message.error(errMsg);
+};

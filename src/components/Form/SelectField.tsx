@@ -29,6 +29,7 @@ interface SelectFieldProps {
   fieldNames?: any;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   filterName?: string;
+  loading?: boolean
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({
@@ -46,6 +47,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   onBlur,
   fieldNames = { defaultFieldNames },
   filterName = 'country',
+  loading = false
 }) => {
   const errorStatus = error ? 'error' : undefined;
   const { token } = useToken();
@@ -69,6 +71,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
               style={{ width: '100%' }}
               fieldNames={fieldNames}
               onBlur={onBlur}
+              loading={loading}
               filterOption={(input, option) =>
                 name.includes(filterName)
                   ? option?.countryName

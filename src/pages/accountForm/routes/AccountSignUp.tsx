@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card, Button, Row, Col } from "antd";
 
 import Title from "antd/es/typography/Title";
@@ -15,14 +15,17 @@ import {
   SelectField,
   NepaliDatePickerField,
 } from "@/components/Form";
-import { useCountryOptions } from "@/hooks/useCountryOptions";
 
 import { useEffect, useState } from "react";
+
+import { useGetBranchListQuery, useGetPrerequisitQuery } from "@/store/apis/coreApi";
+import { usePostStepOneMutation } from "../api/stepAPI";
+import { displayError, displayErrorMsg } from "@/utils/displayMessageUtils";
 // import { adToBs, bsToAd, calculateAge } from '@sbmdkl/nepali-date-converter';
 const AccountSignUp = () => {
   const navigate = useNavigate();
-  const countryOptions = useCountryOptions();
   const [date, setDate] = useState<string>("");
+  const {id} = useParams();
   const {
     control,
     handleSubmit,
@@ -31,47 +34,92 @@ const AccountSignUp = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      existingAccount: false,
-      currency: "npr",
+      isExistingCustomer: "NO",
+      currencyId: 1,
+      nationality: 149
 
     },
     resolver: yupResolver(accountSignUpSchema),
   });
+  console.log("errors", errors)
 
-  const dateOfBirthBS = watch("dateOfBirthBS");
-  const dateOfBirthAD = watch("dateOfBirthAD");
-  const saluation = watch("saluation");
+  const {data:branchList } = useGetBranchListQuery();
+  const {data:preRequisitData } = useGetPrerequisitQuery();
+  const [postStepOne, {isLoading:postStepOneLoading}] = usePostStepOneMutation()
+  const mappedBranches = branchList?.data?.map((branch:any) => ({
+    value: branch.id,
+    label: branch.title
+  })) ?? [];
+
+  const mappedCountries = preRequisitData?.data?.countries.map((country:any) =>({
+    value: country.id,
+    label: country.title
+  }))
+
+  
+
+
+  const mappedSalutation = preRequisitData?.data?.salutations.map((salutation:any) =>({
+    value: salutation.id,
+    label: salutation.title
+  }))
+
+  const mappedCurrency = preRequisitData?.data?.currencies.map((item:any) =>({
+    value: item.id,
+    label: item.code
+  }))
+
+  console.log("branchList", branchList)
+  console.log("preRequisitData", preRequisitData)
+  const dateOfBirthBS = watch("dateOfBirthBs");
+  const dateOfBirthAD = watch("dateOfBirth");
+  const saluation = watch("salutation");
   const gender = watch("gender");
 
-  // useEffect(() => {
-  //   if (dateOfBirthBS) {
-  //     console.log(dateOfBirthBS);
-  //     setValue("dateOfBirthAD", dateOfBirthBS.adDate);
-  //   }
-  // }, [dateOfBirthBS]);
 
   useEffect(() => {
-    if (dateOfBirthAD) {
-      console.log(dateOfBirthAD);
- 
+    if (dateOfBirthBS) {
+      console.log(dateOfBirthBS);
+      setValue("dateOfBirth", dateOfBirthBS.adDate);
     }
-  }, [dateOfBirthAD]);
+  }, [dateOfBirthBS]);
+
+  // useEffect(() => {
+  //   if (dateOfBirthAD) {
+  //     console.log(dateOfBirthAD);
+ 
+  //   }
+  // }, [dateOfBirthAD]);
 
    // If saluation is changed to "mr", update gender to "male"
    useEffect(() => {
-    if (saluation === "mr") {
-      setValue("gender", "male");
+    if (saluation === 1) {
+      setValue("gender", "Male");
     }
-    if (saluation === "miss") {
-      setValue("gender", "female");
+    if (saluation === 2) {
+      setValue("gender", "Female");
     }
   }, [saluation, gender, setValue]);
 
 
 
   const onSubmit: SubmitHandler<AccountSignUpType> = (data) => {
-    console.log(data);
-    navigate("/online-apply/document-verification/43");
+    console.log("submit", data);
+    const payload = {
+      ...data,
+      dateOfBirthBs: data.dateOfBirthBs.bsDate,
+      schemeId: id,
+      accountCategory: "6"
+    }
+
+     postStepOne(payload).unwrap()
+     .then( res => {
+      console.log("res....",res)
+      navigate(`/online-apply/verify-otp/${res.data.reference_number}`)
+     }).catch(err => {
+      
+      displayErrorMsg(err?.data?.message)
+     })
     // console.log("submit");
   };
 
@@ -86,30 +134,30 @@ const AccountSignUp = () => {
             <Col xs={24} md={24}>
               <RadioGroupField
                 label="Do you have an existing account?"
-                name="existingAccount"
+                name="isExistingCustomer"
                 control={control}
-                error={errors.existingAccount?.message ?? ""}
+                error={errors.isExistingCustomer?.message ?? ""}
                 options={[
-                  { label: "Yes", value: true },
-                  { label: "No", value: false },
+                  { label: "Yes", value: "YES" },
+                  { label: "No", value: "NO" },
                 ]}
               />
             </Col>
             <Col xs={24} md={12}>
               <InputField
                 label="Full name"
-                name="fullName"
+                name="accountName"
                 control={control}
-                error={errors.fullName?.message ?? ""}
+                error={errors.accountName?.message ?? ""}
                 required={true}
               />
             </Col>
             <Col xs={24} md={12}>
               <InputField
                 label="Email"
-                name="email"
+                name="emailAddress"
                 control={control}
-                error={errors.email?.message ?? ""}
+                error={errors.emailAddress?.message ?? ""}
                 required={true}
               />
             </Col>
@@ -125,14 +173,14 @@ const AccountSignUp = () => {
             <Col xs={24} md={12}>
               <SelectField
                 showSearch={true}
-                options={countryOptions}
+                options={mappedCountries}
                 label="Nationality"
                 name="nationality"
                 control={control}
                 size="large"
                 placeholder="Select your country"
                 error={errors.nationality?.message ?? ""}
-                filterName="nationality"
+ 
                 // onBlur={handleBlur}
                 required={true}
               />
@@ -140,18 +188,18 @@ const AccountSignUp = () => {
             <Col xs={24} md={12}>
               <NepaliDatePickerField
                 label="Date of birth (BS)"
-                name="dateOfBirthBS"
+                name="dateOfBirthBs"
                 control={control}
-                error={errors.dateOfBirthBS?.message ?? ""}
+                error={errors.dateOfBirthBs?.message ?? ""}
                 required={true}
               />
             </Col>
             <Col xs={24} md={12}>
               <DatePickerField
                 label="Date of birth (AD)"
-                name="dateOfBirthAD"
+                name="dateOfBirth"
                 control={control}
-                error={errors.dateOfBirthAD?.message ?? ""}
+                error={errors.dateOfBirth?.message ?? ""}
                 placeholder=""
                 required={true}
                 dateFormat="YYYY-MM-DD"
@@ -161,26 +209,30 @@ const AccountSignUp = () => {
             <Col xs={24} md={12}>
               <SelectField
                 showSearch={true}
-                options={[
-                  {
-                    label: "Mr",
-                    value: "mr",
-                  },
-                  {
-                    label: "Miss",
-                    value: "miss",
-                  },
-                  {
-                    label: "Minor",
-                    value: "minor",
-                  },
-                ]}
-                name="saluation"
+                options={mappedBranches}
+                label="Select your nearest branch"
+                name="branch"
+                control={control}
+                size="large"
+                placeholder="Select branch"
+                error={errors.branch?.message ?? ""}
+
+ 
+                // onBlur={handleBlur}
+                required={true}
+              />
+            </Col>
+
+            <Col xs={24} md={12}>
+              <SelectField
+                showSearch={true}
+                options={mappedSalutation}
+                name="salutation"
                 control={control}
                 label="Salutation"
                 size="large"
                 placeholder="Select salutation"
-                error={errors.saluation?.message ?? ""}
+                error={errors.salutation?.message ?? ""}
                 required={true}
               />
             </Col>
@@ -190,15 +242,15 @@ const AccountSignUp = () => {
                 options={[
                   {
                     label: "Male",
-                    value: "male",
+                    value: "Male",
                   },
                   {
                     label: "Female",
-                    value: "female",
+                    value: "Female",
                   },
                   {
                     label: "Other",
-                    value: "other",
+                    value: "Other",
                   },
                 ]}
                 name="gender"
@@ -214,22 +266,13 @@ const AccountSignUp = () => {
             <Col xs={24} md={12}>
               <SelectField
                 showSearch={true}
-                options={[
-                  {
-                    label: "NPR",
-                    value: "npr",
-                  },
-                  {
-                    label: "USD",
-                    value: "usd",
-                  },
-                ]}
-                name="currency"
+                options={mappedCurrency}
+                name="currencyId"
                 control={control}
-                label="Currency"
+                label="currencyId"
                 size="large"
                 placeholder="Select currency"
-                error={errors.currency?.message ?? ""}
+                error={errors.currencyId?.message ?? ""}
                 required={true}
               />
             </Col>
@@ -240,9 +283,11 @@ const AccountSignUp = () => {
             size="large"
             htmlType="submit"
             style={{ fontWeight: 700, height: "50px" }}
+            loading={postStepOneLoading}
           >
             Save & Continue
           </Button>
+
         </form>
       </Card>
     </AccountFormLayout>

@@ -4,11 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col, Flex, Input, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import { useNavigate } from "react-router-dom";
+import { useGetProductsQuery } from "../api/productAPI";
+import { Product } from "../types";
 
 const ProductsList = () => {
   const navigate = useNavigate();
-  const handleApply = () => {
-    navigate("/online-apply/customer-register/32");
+  const {data:productList, isLoading:productListLoading} = useGetProductsQuery();
+
+  const handleApply = (item:Product) => {
+    navigate(`/online-apply/customer-register/${item.id}`);
   };
 
   return (
@@ -27,8 +31,8 @@ const ProductsList = () => {
 
               <div id="saving-accounts">
                 <Row gutter={30}>
-                  {new Array(3).fill("x").map((item, index) => (
-                    <Col md={8} sm={12} key={index}>
+                  {productList?.data.map((item) => (
+                    <Col md={8} sm={12} key={item.id}>
                       <div>
                         <div
                           style={{
@@ -42,16 +46,8 @@ const ProductsList = () => {
                           }}
                         >
                           <Title level={3} style={{ lineHeight: "1.6" }}>
-                            <span
-                              style={{
-                                display: "block",
-                                fontSize: "75%",
-                                // color: "#e53135",
-                              }}
-                            >
-                              Sarbashrestha
-                            </span>
-                            Sunya Maujdat Bachat Khata
+                          
+                             {item.title}
                           </Title>
                           <div
                             style={{
@@ -88,8 +84,8 @@ const ProductsList = () => {
                           }}
                         >
                           <ul>
-                            <li>Interest Rate : 5.650%</li>
-                            <li>Minimum Balance of Rs. 100,000</li>
+                            <li>Interest Rate : {item?.interestRateRange ?? '4.5'}%</li>
+                            <li>Minimum Balance of Rs. {item.minimumBalance}</li>
                           </ul>
 
                           <Flex style={{ marginTop: "1.5rem" }} gap={20}>
@@ -111,7 +107,7 @@ const ProductsList = () => {
                                 fontWeight: "700",
                                 height: "50px",
                               }}
-                              onClick={handleApply}
+                              onClick={() => handleApply(item)}
                             >
                               Apply
                             </Button>

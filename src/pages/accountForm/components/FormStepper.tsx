@@ -29,22 +29,33 @@ const FormStepper: FC<FormStepperProps> = ({ current = 0, progress = 30 }) => {
             current={current}
             status="process"
             percent={progress}
+            labelPlacement="vertical"
             items={[
               {
                 title: "Register",
                 // icon: <SolutionOutlined />,
-                subTitle: current === 0 ? "In Progress" : "",
+                // subTitle: current === 0 ? "In Progress" : "",
               },
               {
-                title: "Documents & Idenfication",
+                title: "Address",
                 // icon: <FileDoneOutlined />,
-                subTitle: current === 1 ? "In Progress" : "",
+                // subTitle: current === 1 ? "In Progress" : "",
+              },
+              {
+                title: "Occupation",
+                // icon: <FileDoneOutlined />,
+                // subTitle: current === 2 ? "In Progress" : "",
+              },
+              {
+                title: "Declaration",
+                // icon: <FileDoneOutlined />,
+                // subTitle: current === 3 ? "In Progress" : "",
               },
 
               {
-                title: "Address & Employment",
+                title: "Documents",
                 // icon: <AimOutlined />,
-                subTitle: current === 2 ? "In Progress" : "",
+                // subTitle: current === 4 ? "In Progress" : "",
               },
             ]}
           />
