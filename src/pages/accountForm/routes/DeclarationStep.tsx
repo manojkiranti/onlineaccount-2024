@@ -29,7 +29,7 @@ import { displayErrorMsg } from "@/utils/displayMessageUtils";
 import { mapObjectKeysToSnakeCase } from "@/utils/mapper";
 import { occupationSchema } from "../schema/OccupationSchema";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { usePostStepThreeMutation } from "../api/stepAPI";
+import { usePostStepFourMutation, usePostStepThreeMutation } from "../api/stepAPI";
 import { declarationSchema } from "../schema/DeclarationSchema";
 import { confirmOptions } from "@/devFrontData/options";
 
@@ -59,7 +59,7 @@ const DeclarationStep = () => {
 
   const { data: preRequisitData, isLoading: preRequisitLoading } =
     useGetPrerequisitQuery();
-  const [postStepThree, {isLoading: postStepThreeLoading}] =  usePostStepThreeMutation();
+  const [postStepFour, {isLoading: postStepFouroading}] =  usePostStepFourMutation();
   
   console.log("preRequisitData", preRequisitData)
   
@@ -70,6 +70,7 @@ const DeclarationStep = () => {
   const watchHasBankAccountInOther =  watch("hasBankAccountWithOtherBfi");
   const watchIsNominee = watch("isNominee");
   const watchIsNomineeMinor = watch("isNomineeMinor");
+  const watchBeneficiary = watch("isBeneficiary");
 
   const mappedMobank = preRequisitData?.data?.mobile_bankings.map((item:any) =>({
     value: item.id,
@@ -95,18 +96,46 @@ const DeclarationStep = () => {
 
   const onSubmit: SubmitHandler<DeclarationType> = (data) => {
 
+    const declarationAndServices = {
+      accountServices: data.accountServices,
+      isNrn: data.isNrn,
+      isUsResident: data.isUsResident,
+      isUsCitizen: data.isUsCitizen,
+      isGreenCardHolder: data.isGreenCardHolder,
+      hasCriminalOffense: data.hasCriminalOffense,
+      criminalOffenseReason: data.criminalOffenseReason,
+      wantDebitCard: data.wantDebitCard,
+      cardType: data.cardType,
+      cardHolderFirstName: data.cardHolderFirstName,
+      cardHolderMiddleName: data.cardHolderMiddleName,
+      cardHolderLastName: data.cardHolderLastName,
+      wantInternetBanking: data.wantInternetBanking,
+      internetBankingType: data.internetBankingType,
+      wantChequeBook: data.wantChequeBook,
+      wantMobileBanking: data.wantMobileBanking,
+      mobileBankingType: data.mobileBankingType,
+      wantSmsBanking: data.wantSmsBanking,
+      hasBankAccountWithOtherBfi: data.hasBankAccountWithOtherBfi,
+      bankInstitutionName: data.bankInstitutionName,
+      bankInstitutionAccNum: data.bankInstitutionAccNum,
+    }
+    const nomineeDetails = {
 
-    const payload = {
+    }
+    const beneficiaryDetails = {
 
-      
-
-     
     }
 
-    postStepThree({payload:payload, token:token as string}).unwrap()
+    const payload = {
+      declarationAndServices:{},
+      nomineeDetails:{},
+      beneficiaryDetails:{}
+    }
+
+    postStepFour({payload:payload, token:token as string}).unwrap()
     .then((res) => {
       console.log(res)
-      // navigate(`/online-apply/step-three/${res.data.token}`)
+      // navigate(`/online-apply/step-five/${res.data.token}`)
     }).catch(err => {
       displayErrorMsg(err?.data?.message)
     })
@@ -587,7 +616,58 @@ const DeclarationStep = () => {
                   label: "Benificiary Details",
                   children: (
                     <div style={{ width: "100%" }}>
-                      
+                      <Row gutter={30}>
+                        <Col xs={24} md={12}>
+                            <RadioGroupField
+                               control={control}
+                               name="isBeneficiary"
+                               label="Is Beneficiary ?"
+                               options={confirmOptions}
+                               error={errors.isBeneficiary?.message ?? ""}
+                               />
+                        </Col>
+                        {watchBeneficiary && <>
+                          <Col xs={24} md={8}>
+                              <InputField
+                                label="Beneniciary Name"
+                                name="beneficiaryName"
+                                control={control}
+                                error={errors.beneficiaryName?.message ?? ""}
+                                required={true}
+                              />
+                            </Col>
+                            <Col xs={24} md={8}>
+                              <InputField
+                                label="Beneniciary Address"
+                                name="beneficiaryAddress"
+                                control={control}
+                                error={errors.beneficiaryAddress?.message ?? ""}
+                                required={true}
+                              />
+                            </Col>
+                            <Col xs={24} md={8}>
+                              <InputField
+                                label="Beneniciary Contact"
+                                name="beneficiaryContact"
+                                control={control}
+                                error={errors.beneficiaryContact?.message ?? ""}
+                                required={true}
+                              />
+                            </Col>
+                            <Col xs={24} md={8}>
+                                <SelectField
+                                  options={mappedRelationship}
+                                  label="Beneficiary Relationship"
+                                  name="beneficiaryRelationship"
+                                  control={control}
+                                  size="large"
+                                  placeholder="Select relationship"
+                                  error={errors.beneficiaryRelationship?.message ?? ""}
+                                  required={true}
+                                />
+                            </Col>
+                        </>}
+                      </Row>
                     </div>
                   ),
                 },
@@ -603,8 +683,8 @@ const DeclarationStep = () => {
                 size="large"
                 htmlType="submit"
                 style={{ fontWeight: 700, height: "50px" }}
-                loading={postStepThreeLoading}
-                disabled={postStepThreeLoading}
+                loading={postStepFouroading}
+                disabled={postStepFouroading}
               >
                 Save & Continue
               </Button>

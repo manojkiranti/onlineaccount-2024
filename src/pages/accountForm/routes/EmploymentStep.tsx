@@ -29,6 +29,7 @@ import { occupationSchema } from "../schema/OccupationSchema";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { usePostStepThreeMutation } from "../api/stepAPI";
 
+
 const EmploymentStep = () => {
   const { token } = useParams();
   const navigate = useNavigate();
@@ -47,9 +48,10 @@ const EmploymentStep = () => {
 
   const { data: preRequisitData, isLoading: preRequisitLoading } =
     useGetPrerequisitQuery();
-  const [postStepThree, {isLoading: postStepThreeLoading}] =  usePostStepThreeMutation();
-  
-  console.log("preRequisitData", preRequisitData)
+  const [postStepThree, { isLoading: postStepThreeLoading }] =
+    usePostStepThreeMutation();
+
+  console.log("preRequisitData", preRequisitData);
 
   const mappedCountries = preRequisitData?.data?.countries.map(
     (country: any) => ({
@@ -108,19 +110,19 @@ const EmploymentStep = () => {
     })
   );
 
-  const watchEmploymentType = watch("employmentType")
-  const watchMaritalStatus = watch("maritalStatus")
-  const watchPurposeOfAccount = watch("purposeOfAccount")
-  const watchFundSource = watch("sourceOfIncome")
+  const watchEmploymentType = watch("employmentType");
+  const watchMaritalStatus = watch("maritalStatus");
+  const watchPurposeOfAccount = watch("purposeOfAccount");
+  const watchFundSource = watch("sourceOfIncome");
 
   const {
     fields: sonsFields,
     append: appendSon,
     remove: removeSon,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
   } = useFieldArray({
     control,
+    // @ts-ignore
     name: "sonsName",
   });
 
@@ -129,9 +131,9 @@ const EmploymentStep = () => {
     append: appendDaughter,
     remove: removeDaughter,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
   } = useFieldArray({
     control,
+    // @ts-ignore
     name: "daughtersName",
   });
 
@@ -158,7 +160,7 @@ const EmploymentStep = () => {
       purposeOfAccount_other: data.purposeOfAccountOther,
       sourceOfIncome: data.sourceOfIncome,
       sourceOfIncomeOther: data.sourceOfIncomeOther,
-    }
+    };
 
     const identificationDetail = {
       maxAmountPerTransaction: data.maxAmountPerTransaction,
@@ -168,7 +170,8 @@ const EmploymentStep = () => {
       yearlyAmountTransaction: data.yearlyAmountTransaction,
       identificationType: data.identificationType,
       identificationDocumentNumber: data.identificationDocumentNumber,
-      identificationDocumentIssued_place: data.identificationDocumentIssuedPlace,
+      identificationDocumentIssued_place:
+        data.identificationDocumentIssuedPlace,
       identificationIssuedDateInAd: data.identificationIssuedDateInAd,
       identificationIssuedDateInBs: data.identificationIssuedDateInBs.bsDate,
       identificationDocumentExpiry_date: data.identificationDocumentExpiryDate,
@@ -187,23 +190,22 @@ const EmploymentStep = () => {
       sonsName: data.sonsName,
       daughtersName: data.daughtersName,
       specifyOthers: data.specifyOthers,
-    }
+    };
 
     const payload = {
-
       occupationDetails: mapObjectKeysToSnakeCase(occupationDetails),
       identificationDetail: mapObjectKeysToSnakeCase(identificationDetail),
+    };
 
-     
-    }
-
-    postStepThree({payload:payload, token:token as string}).unwrap()
-    .then((res) => {
-      console.log(res)
-      navigate(`/online-apply/step-four/${res.data.token}`)
-    }).catch(err => {
-      displayErrorMsg(err?.data?.message)
-    })
+    postStepThree({ payload: payload, token: token as string })
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+        navigate(`/online-apply/step-four/${res.data.token}`);
+      })
+      .catch((err) => {
+        displayErrorMsg(err?.data?.message);
+      });
   };
 
   console.log(errors);
@@ -252,81 +254,83 @@ const EmploymentStep = () => {
                           />
                         </Col>
 
-                      
-                      { ((watchEmploymentType !== 4 && watchEmploymentType !== 5 && watchEmploymentType !==3) && (watchEmploymentType !== undefined))
-                       &&
-                      (
-                        <>
-                        <Col xs={24} md={12}>
-                          <InputField
-                            label="Organization Name"
-                            name="organizationName"
-                            control={control}
-                            error={errors.organizationName?.message ?? ""}
-                            required={true}
-                          />
-                        </Col>
-                        <Col xs={24} md={12}>
-                          <InputField
-                            label="Organization Address"
-                            name="organizationAddress"
-                            control={control}
-                            error={errors.organizationAddress?.message ?? ""}
-                            required={true}
-                          />
-                        </Col>
-                        <Col xs={24} md={12}>
-                          <InputField
-                            label="Organization Contact Number"
-                            name="organizationContactNumber"
-                            control={control}
-                            error={
-                              errors.organizationContactNumber?.message ?? ""
-                            }
-                            required={true}
-                          />
-                        </Col>
-                        <Col xs={24} md={12}>
-                          <InputField
-                            label="Designation"
-                            name="designation"
-                            control={control}
-                            error={errors.designation?.message ?? ""}
-                            required={true}
-                          />
-                        </Col>
-                        <Col xs={24} md={12}>
-                          <InputField
-                            label="Annual Income"
-                            name="annualIncome"
-                            control={control}
-                            error={errors.annualIncome?.message ?? ""}
-                            required={true}
-                            type="number"
-                          />
-                        </Col>
-                        <Col xs={24} md={12}>
-                          <InputField
-                            label="Annual Salary"
-                            name="annualSalary"
-                            control={control}
-                            error={errors.annualSalary?.message ?? ""}
-                            required={true}
-                            type="number"
-                          />
-                        </Col>
-                        <Col xs={24} md={12}>
-                          <InputField
-                            label="PAN number"
-                            name="panNo"
-                            control={control}
-                            error={errors.panNo?.message ?? ""}
-                            required={true}
-                          />
-                        </Col>
-                        </>
-                        )
-                        }
+                        {watchEmploymentType !== 4 &&
+                          watchEmploymentType !== 5 &&
+                          watchEmploymentType !== 3 &&
+                          watchEmploymentType !== undefined && (
+                            <>
+                              <Col xs={24} md={12}>
+                                <InputField
+                                  label="Organization Name"
+                                  name="organizationName"
+                                  control={control}
+                                  error={errors.organizationName?.message ?? ""}
+                                  required={true}
+                                />
+                              </Col>
+                              <Col xs={24} md={12}>
+                                <InputField
+                                  label="Organization Address"
+                                  name="organizationAddress"
+                                  control={control}
+                                  error={
+                                    errors.organizationAddress?.message ?? ""
+                                  }
+                                  required={true}
+                                />
+                              </Col>
+                              <Col xs={24} md={12}>
+                                <InputField
+                                  label="Organization Contact Number"
+                                  name="organizationContactNumber"
+                                  control={control}
+                                  error={
+                                    errors.organizationContactNumber?.message ??
+                                    ""
+                                  }
+                                  required={true}
+                                />
+                              </Col>
+                              <Col xs={24} md={12}>
+                                <InputField
+                                  label="Designation"
+                                  name="designation"
+                                  control={control}
+                                  error={errors.designation?.message ?? ""}
+                                  required={true}
+                                />
+                              </Col>
+                              <Col xs={24} md={12}>
+                                <InputField
+                                  label="Annual Income"
+                                  name="annualIncome"
+                                  control={control}
+                                  error={errors.annualIncome?.message ?? ""}
+                                  required={true}
+                                  type="number"
+                                />
+                              </Col>
+                              <Col xs={24} md={12}>
+                                <InputField
+                                  label="Annual Salary"
+                                  name="annualSalary"
+                                  control={control}
+                                  error={errors.annualSalary?.message ?? ""}
+                                  required={true}
+                                  type="number"
+                                />
+                              </Col>
+                              <Col xs={24} md={12}>
+                                <InputField
+                                  label="PAN number"
+                                  name="panNo"
+                                  control={control}
+                                  error={errors.panNo?.message ?? ""}
+                                  required={true}
+                                />
+                              </Col>
+                            </>
+                          )}
                         <Col xs={24} md={12}>
                           <SelectField
                             options={mappedPurposeAccount}
@@ -341,15 +345,19 @@ const EmploymentStep = () => {
                             required={true}
                           />
                         </Col>
-                        {watchPurposeOfAccount === 3 && <Col xs={24} md={12}>
-                          <InputField
-                            label="Purpose of account other"
-                            name="purposeOfAccountOther"
-                            control={control}
-                            error={errors.purposeOfAccountOther?.message ?? ""}
-                            required={true}
-                          />
-                        </Col>}
+                        {watchPurposeOfAccount === 3 && (
+                          <Col xs={24} md={12}>
+                            <InputField
+                              label="Purpose of account other"
+                              name="purposeOfAccountOther"
+                              control={control}
+                              error={
+                                errors.purposeOfAccountOther?.message ?? ""
+                              }
+                              required={true}
+                            />
+                          </Col>
+                        )}
                         <Col xs={24} md={12}>
                           <SelectField
                             options={mappedFundSource}
@@ -364,16 +372,17 @@ const EmploymentStep = () => {
                             required={true}
                           />
                         </Col>
-                        {watchFundSource === 6 &&<Col xs={24} md={12}>
-                          <InputField
-                            label="Source of income other"
-                        
-                            name="sourceOfIncomeOther"
-                            control={control}
-                            error={errors.sourceOfIncomeOther?.message ?? ""}
-                            required={true}
-                          />
-                        </Col>}
+                        {watchFundSource === 6 && (
+                          <Col xs={24} md={12}>
+                            <InputField
+                              label="Source of income other"
+                              name="sourceOfIncomeOther"
+                              control={control}
+                              error={errors.sourceOfIncomeOther?.message ?? ""}
+                              required={true}
+                            />
+                          </Col>
+                        )}
                       </Row>
                     </div>
                   ),
@@ -488,7 +497,6 @@ const EmploymentStep = () => {
                                 ?.message ?? ""
                             }
                             required={true}
-                   
                           />
                         </Col>
                         <Col xs={24} md={8}>
@@ -521,7 +529,8 @@ const EmploymentStep = () => {
                             name="identificationDocumentExpiryDate"
                             control={control}
                             error={
-                              errors.identificationDocumentExpiryDate?.message ?? ""
+                              errors.identificationDocumentExpiryDate
+                                ?.message ?? ""
                             }
                             placeholder=""
                             required={true}
@@ -563,7 +572,6 @@ const EmploymentStep = () => {
                           />
                         </Col>
                         <Col xs={24} md={8}>
-                      
                           <SelectField
                             showSearch={true}
                             options={mappedQualification}
@@ -626,7 +634,7 @@ const EmploymentStep = () => {
                             required={true}
                           />
                         </Col>
-                        {watchMaritalStatus === 1 && 
+                        {watchMaritalStatus === 1 && (
                           <>
                             <Col xs={24} md={8}>
                               <InputField
@@ -664,7 +672,7 @@ const EmploymentStep = () => {
                                 required={true}
                               />
                             </Col>
-               
+
                             <Col xs={24} md={8}>
                               <FormLabel label="Sons Name" />
                               {sonsFields.map((item, index) => (
@@ -679,13 +687,10 @@ const EmploymentStep = () => {
                                       />
                                     )}
                                   />
-                
-                                  <Button
-                                    
-                                    onClick={() => removeSon(index)}
-                                  >
+
+                                  <Button onClick={() => removeSon(index)}>
                                     Remove
-                                </Button>
+                                  </Button>
                                 </div>
                               ))}
                               <Button
@@ -697,7 +702,7 @@ const EmploymentStep = () => {
                               </Button>
                             </Col>
                             <Col xs={24} md={8}>
-                               <FormLabel label="Daughters Name" />
+                              <FormLabel label="Daughters Name" />
                               <Row>
                                 {daughtersFields.map((field, index) => (
                                   <Col xs={24} md={12} key={field.id}>
@@ -712,7 +717,6 @@ const EmploymentStep = () => {
                                       )}
                                     />
                                     <Button
-                                    
                                       onClick={() => removeDaughter(index)}
                                     >
                                       Remove
@@ -729,20 +733,19 @@ const EmploymentStep = () => {
                               </Button>
                             </Col>
                           </>
-                        }
+                        )}
 
-                        {watchMaritalStatus === 5 && 
-
-                        <Col xs={24} md={8}>
-                          <InputField
-                            label="Specify Others"
-                            name="specifyOthers"
-                            control={control}
-                            error={errors.specifyOthers?.message ?? ""}
-                            required={true}
-                          />
-                        </Col>
-                        }
+                        {watchMaritalStatus === 5 && (
+                          <Col xs={24} md={8}>
+                            <InputField
+                              label="Specify Others"
+                              name="specifyOthers"
+                              control={control}
+                              error={errors.specifyOthers?.message ?? ""}
+                              required={true}
+                            />
+                          </Col>
+                        )}
                       </Row>
                     </div>
                   ),

@@ -22,7 +22,7 @@ export const AccountRoutes: React.FC = () => {
         <Route path="step-two/:token" element={<AddressStep />} />
         <Route path="step-three/:token" element={<EmploymentStep />} />
         <Route path="step-four/:token" element={<DeclarationStep />} />
-        <Route path="document-verification/:userId" element={<DocumentVerification />} />
+        <Route path="step-five/:token" element={<DocumentVerification />} />
 
         {/* Redirect any unknown paths to the default route */}
         <Route path="*" element={<Navigate to="." />} />

@@ -53,6 +53,19 @@ export const stepAPI = createApi({
         };
       },
     }),
+    postStepFour: builder.mutation<
+      ApiResponse<{token:string}>,
+      {payload:any, token:string}
+    >({
+      query: (body) => {
+  
+        return {
+          url: `api/online/step-four/store/${body.token}`,
+          method: "POST",
+          body: body.payload,
+        };
+      },
+    }),
     verifyStepOne: builder.mutation<
       ApiResponse<{token:string}>,
       any
@@ -63,10 +76,10 @@ export const stepAPI = createApi({
           url: "api/online/otp-verify",
           method: "POST",
           body: transformedData,
-        };navigate(`/online-apply/step-three/${res.data.token}`)
+        };
       },
     }),
   }),
 });
 
-export const { usePostStepOneMutation, useVerifyStepOneMutation, usePostStepTwoMutation, usePostStepThreeMutation } = stepAPI;
+export const { usePostStepOneMutation, useVerifyStepOneMutation, usePostStepTwoMutation, usePostStepThreeMutation, usePostStepFourMutation } = stepAPI;
