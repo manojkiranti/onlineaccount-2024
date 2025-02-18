@@ -44,6 +44,7 @@ const DeclarationStep = () => {
   } = useForm<DeclarationType>({
     resolver: yupResolver(declarationSchema),
     defaultValues: {
+      accountServices:["want_debit_card"],
       isNrn: "No",
       isUsCitizen: "No",
       isUsResident: "No",
@@ -117,25 +118,48 @@ const DeclarationStep = () => {
       wantSmsBanking: data.wantSmsBanking,
       hasBankAccountWithOtherBfi: data.hasBankAccountWithOtherBfi,
       bankInstitutionName: data.bankInstitutionName,
-      bankInstitutionAccNum: data.bankInstitutionAccNum,
+      bankInstitutionAccNum: data.bankInstitutionAccNum
     }
     const nomineeDetails = {
-
+      isNominee: data.isNominee,
+      nomineeName: data.nomineeName,
+      nomineeFatherName: data.nomineeFatherName,
+      nomineeGndFatherName: data.nomineeGndFatherName,
+      nomineeCurrentAddress: data.nomineeCurrentAddress,
+      nomineePermanentAddress: data.nomineePermanentAddress,
+      nomineeCitizenshipNo: data.nomineeCitizenshipNo,
+      nomineeCitizenshipIssueDate: data.nomineeCitizenshipIssueDate,
+      nomineeDob: data.nomineeDob,
+      nomineeRelationship: data.nomineeRelationship,
+      nomineeCitizenshipIssuePlace: data.nomineeCitizenshipIssuePlace,
+      nomineePassportNo: data.nomineePassportNo,
+      nomineeMobileNo: data.nomineeMobileNo,
+      isNomineeMinor: data.isNomineeMinor,
+      minorGuardianName: data.minorGuardianName,
+      nomineeMinorRelationship: data.nomineeMinorRelationship,
+      nomineeMinorCtznIssDateAd: data.nomineeMinorCtznIssDateAd,
+      nomineeMinorCtznIssPlace: data.nomineeMinorCtznIssPlace,
+      nomineeMinorCtznNo: data.nomineeMinorCtznNo,
+      
     }
     const beneficiaryDetails = {
-
+      isBeneficiary: data.isBeneficiary,
+      beneficiaryName: data.beneficiaryName,
+      beneficiaryAddress: data.beneficiaryAddress,
+      beneficiaryContact: data.beneficiaryContact,
+      beneficiaryRelationship: data.beneficiaryRelationship
     }
 
     const payload = {
-      declarationAndServices:{},
-      nomineeDetails:{},
-      beneficiaryDetails:{}
+      declarationAndServices: mapObjectKeysToSnakeCase(declarationAndServices),
+      nomineeDetails: mapObjectKeysToSnakeCase(nomineeDetails),
+      beneficiaryDetails: mapObjectKeysToSnakeCase(beneficiaryDetails)
     }
 
     postStepFour({payload:payload, token:token as string}).unwrap()
     .then((res) => {
       console.log(res)
-      // navigate(`/online-apply/step-five/${res.data.token}`)
+      navigate(`/online-apply/step-five/${res.data.token}`)
     }).catch(err => {
       displayErrorMsg(err?.data?.message)
     })
@@ -626,7 +650,7 @@ const DeclarationStep = () => {
                                error={errors.isBeneficiary?.message ?? ""}
                                />
                         </Col>
-                        {watchBeneficiary && <>
+                        {watchBeneficiary === "Yes" && <>
                           <Col xs={24} md={8}>
                               <InputField
                                 label="Beneniciary Name"

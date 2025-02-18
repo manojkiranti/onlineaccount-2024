@@ -1,0 +1,2 @@
+import{j as s,C as o,R as r,p as e,w as l}from"./index-DazLNJNH.js";const n="_logo_14y93_5",a={"main-header":"_main-header_14y93_1",logo:n},d=()=>s.jsx("header",{className:a["main-header"],children:s.jsx(o,{children:s.jsxs(r,{children:[s.jsx(e,{md:8,sm:24,children:s.jsx("div",{children:s.jsx("img",{className:a.logo,src:l,alt:""})})}),s.jsx(e,{md:16,sm:24})]})})});export{d as P};
+//# sourceMappingURL=PublicHeader-BQwnlvux.js.map

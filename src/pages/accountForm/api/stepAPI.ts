@@ -14,6 +14,19 @@ export const stepAPI = createApi({
     },
   }),
   endpoints: (builder) => ({
+    uploadFile: builder.mutation<
+      ApiResponse<{ file_url: string }>,
+      {token:string, file:FormData}
+    >({
+      query: ({token, file}) => {
+        return {
+          url: `api/online/document/upload/${token}`, // Adjust the URL according to your API endpoint
+          method: 'POST',
+          body: file,
+          // No need to set Content-Type header, fetchBaseQuery will handle it
+        };
+      },
+    }),
     postStepOne: builder.mutation<
       ApiResponse<{reference_number:string}>,
       any
@@ -66,6 +79,18 @@ export const stepAPI = createApi({
         };
       },
     }),
+    postStepFive: builder.mutation<
+      ApiResponse<{token:string}>,
+      {token:string}
+    >({
+      query: (body) => {
+  
+        return {
+          url: `api/online/step-four/store/${body.token}`,
+          method: "POST"
+        };
+      },
+    }),
     verifyStepOne: builder.mutation<
       ApiResponse<{token:string}>,
       any
@@ -82,4 +107,4 @@ export const stepAPI = createApi({
   }),
 });
 
-export const { usePostStepOneMutation, useVerifyStepOneMutation, usePostStepTwoMutation, usePostStepThreeMutation, usePostStepFourMutation } = stepAPI;
+export const { usePostStepOneMutation, useVerifyStepOneMutation, usePostStepTwoMutation, usePostStepThreeMutation, usePostStepFourMutation, useUploadFileMutation, usePostStepFiveMutation } = stepAPI;

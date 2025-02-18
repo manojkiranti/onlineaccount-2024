@@ -7,7 +7,10 @@ const declarationSchema = yup.object({
     isUsCitizen: yup.string().required("Please verify your status"),
     isGreenCardHolder: yup.string().required("Please verify your status"),
     hasCriminalOffense: yup.string().required("Please verify your status"),
-    criminalOffenseReason: yup.string().required("Please verify offence reason"),
+    criminalOffenseReason: yup.string().when("hasCriminalOffense", {
+        is: "Yes", 
+        then:  (schema) => schema.required("Reason is required"),
+    }),
     wantDebitCard: yup.string().required("Please verify your status"),
     cardType: yup.string().when("wantDebitCard", {
         is: "Yes", 
