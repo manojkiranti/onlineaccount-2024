@@ -20,8 +20,8 @@ const ProductsList = () => {
       <div style={{ padding: "2rem 0" }}>
         <Container>
           <Row gutter={30}>
-            <Col md={4} sm={24}></Col>
-            <Col md={24} sm={24}>
+            <Col md={4} xs={24}></Col>
+            <Col md={24} xs={24}>
               <div style={{ padding: "0 0 4rem" }}>
                 <Input
                   placeholder="Search Your Desired Product"
@@ -32,8 +32,8 @@ const ProductsList = () => {
               <div id="saving-accounts">
                 <Row gutter={30}>
                   {productList?.data.map((item) => (
-                    <Col md={8} sm={12} key={item.id}>
-                      <div>
+                    <Col md={8} xs={24} key={item.id}>
+                      <div style={{marginBottom:"1rem"}}>
                         <div
                           style={{
                             background: "rgb(225 225 225)",

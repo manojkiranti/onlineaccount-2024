@@ -7,12 +7,9 @@ interface ContainerProps {
 export const AsideContainer: FC<ContainerProps> = ({ children, style }) => {
   return (
     <div
+     className="aside-container"
       style={{
-        maxWidth: "1230px",
-        width: "calc(100% - 25%)",
-        margin: "0 auto",
-        marginRight: "26%",
-        padding: "0 16px",
+        
         ...style,
       }}
     >

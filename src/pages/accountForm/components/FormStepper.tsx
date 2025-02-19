@@ -26,6 +26,7 @@ const FormStepper: FC<FormStepperProps> = ({ current = 0, progress = 30 }) => {
           }}
         >
           <Steps
+           direction="horizontal"
             current={current}
             status="process"
             percent={progress}

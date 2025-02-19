@@ -228,3 +228,22 @@
   .ant-collapse-header-text {
     font-weight: 700;
   }
+
+  .aside-container{
+      max-width: 1230px;
+      
+      margin: 0 auto;
+      
+      padding: 0 16px;
+  }
+  @media only screen and (min-width: 768px) {
+    .aside-container{
+      margin-right: 26%;
+      width: calc(100% - 25%);
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    .home{
+      padding-bottom: 75px;
+    }
+  }

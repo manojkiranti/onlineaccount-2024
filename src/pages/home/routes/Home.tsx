@@ -7,7 +7,7 @@ import ProductsList from "../components/ProductsList";
 const Home = () => {
 
   return (
-    <>
+    <div className="home">
       <div>
         <div style={{ backgroundColor: "#f6f7fa" }}>
           <PublicHeader />
@@ -17,7 +17,7 @@ const Home = () => {
         <ProductsList />
       </div>
       <QuickLinks />
-    </>
+    </div>
   );
 };
 
