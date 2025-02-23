@@ -1,0 +1,2 @@
+import{j as s,C as o,R as r,p as a,L as n,w as i}from"./index-Ae3SNTaF.js";const l="_logo_x8faj_5",e={"main-header":"_main-header_x8faj_1",logo:l},c=()=>s.jsx("header",{className:e["main-header"],children:s.jsx(o,{children:s.jsxs(r,{children:[s.jsx(a,{md:8,sm:24,children:s.jsx("div",{children:s.jsx(n,{to:"/",children:s.jsx("img",{className:e.logo,src:i,alt:""})})})}),s.jsx(a,{md:16,sm:24})]})})});export{c as P};
+//# sourceMappingURL=PublicHeader-sOQc8eBO.js.map

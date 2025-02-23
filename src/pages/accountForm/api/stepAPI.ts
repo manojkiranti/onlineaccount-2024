@@ -80,16 +80,19 @@ export const stepAPI = createApi({
       },
     }),
     postStepFive: builder.mutation<
-      ApiResponse<{token:string}>,
+      ApiResponse<any>,
       {token:string}
     >({
       query: (body) => {
   
         return {
-          url: `api/online/step-four/store/${body.token}`,
+          url: `api/online/step-five/store/${body.token}`,
           method: "POST"
         };
       },
+    }),
+    getRequiredDocuments: builder.query<any, string>({
+      query: ( token) => `api/online/step-five/documents/${token}`,
     }),
     verifyStepOne: builder.mutation<
       ApiResponse<{token:string}>,
@@ -107,4 +110,13 @@ export const stepAPI = createApi({
   }),
 });
 
-export const { usePostStepOneMutation, useVerifyStepOneMutation, usePostStepTwoMutation, usePostStepThreeMutation, usePostStepFourMutation, useUploadFileMutation, usePostStepFiveMutation } = stepAPI;
+export const { 
+  usePostStepOneMutation, 
+  useVerifyStepOneMutation, 
+  usePostStepTwoMutation, 
+  usePostStepThreeMutation, 
+  usePostStepFourMutation, 
+  useUploadFileMutation, 
+  usePostStepFiveMutation,
+  useGetRequiredDocumentsQuery 
+} = stepAPI;

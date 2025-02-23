@@ -1,2 +1,0 @@
-import{j as s,C as o,R as r,p as a,w as l}from"./index-CZ1dh9Kt.js";const n="_logo_x8faj_5",e={"main-header":"_main-header_x8faj_1",logo:n},d=()=>s.jsx("header",{className:e["main-header"],children:s.jsx(o,{children:s.jsxs(r,{children:[s.jsx(a,{md:8,sm:24,children:s.jsx("div",{children:s.jsx("img",{className:e.logo,src:l,alt:""})})}),s.jsx(a,{md:16,sm:24})]})})});export{d as P};
-//# sourceMappingURL=PublicHeader-ULC05hpm.js.map

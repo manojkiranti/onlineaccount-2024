@@ -8,6 +8,7 @@ import OTPVerify from './OTPVerify';
 import AddressStep from './AddressStep';
 import EmploymentStep from './EmploymentStep';
 import DeclarationStep from './DeclarationStep';
+import FinalPage from './FinalPage';
 
 
 
@@ -23,7 +24,7 @@ export const AccountRoutes: React.FC = () => {
         <Route path="step-three/:token" element={<EmploymentStep />} />
         <Route path="step-four/:token" element={<DeclarationStep />} />
         <Route path="step-five/:token" element={<DocumentVerification />} />
-
+        <Route path="final-step" element={<FinalPage />} />
         {/* Redirect any unknown paths to the default route */}
         <Route path="*" element={<Navigate to="." />} />
   </Routes>
